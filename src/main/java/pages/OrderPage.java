@@ -71,7 +71,7 @@ public class OrderPage {
     public static final By YES_ORDER_CONFIRMATION_BUTTON = By.xpath("//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
 
     //Сообщение об успехе - отсутствует
-    public static final By SUCCESS_MESSAGE = By.xpath("//span[text()='Заказ создан']");
+    public static final By SUCCESS_MESSAGE = By.xpath("//span[text()='Заказ оформлен']");
 
     //Методы заполнения полей
     public void enterName(String name) {

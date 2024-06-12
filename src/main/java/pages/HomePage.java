@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import static org.junit.Assert.assertTrue;
 
 public class HomePage {
     private WebDriverWait wait;
@@ -55,7 +56,7 @@ public class HomePage {
         WebElement questionElement = wait.until(ExpectedConditions.elementToBeClickable(questionButton));
         questionElement.click();
         WebElement answerElement = wait.until(ExpectedConditions.visibilityOfElementLocated(answerText));
-        assert answerElement.isDisplayed() : "Ответ не отображается";
+        assertTrue("Ответ не отображается", answerElement.isDisplayed());
     }
 
     //Метод для клика по кнопке "Заказать" в шапке

@@ -1,22 +1,19 @@
-import org.junit.After;
+package functionalities;
+
+import common.CommonTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import pages.HomePage;
+
 import java.util.Arrays;
 import java.util.Collection;
 
 @RunWith(Parameterized.class)
-public class QuestionsAndAnswersTest {
-
-    private WebDriver driver;
-    private HomePage homePage;
+public class QuestionsAndAnswersTest extends CommonTest {
 
     private final By questionButton;
     private final By answerText;
@@ -41,26 +38,13 @@ public class QuestionsAndAnswersTest {
     }
 
     @Before
+    @Override
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriverForWindows.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--enable-automation");
-        options.addArguments("--disable-javascript"); // Отключаем JavaScript
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.get(HomePage.MAIN_PAGE);
-        homePage = new HomePage(driver);
-        homePage.clickCookieButton();
+        setBrowserType("chrome");
+        super.setUp();
         //Скролл страницы до конца
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 
     @Test

@@ -1,12 +1,10 @@
-import org.junit.After;
+package functionalities;
+
+import common.CommonTest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import pages.HomePage;
 import pages.OrderPage;
 
 import java.util.Arrays;
@@ -15,17 +13,15 @@ import java.util.Collection;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
-public class OrderPlacementTest {
+public class OrderPlacementTest extends CommonTest  {
 
-    private WebDriver driver;
-    private HomePage homePage;
     private OrderPage orderPage;
 
-    private String name;
-    private String surname;
-    private String address;
-    private String phone;
-    private String comment;
+    private final String name;
+    private final String surname;
+    private final String address;
+    private final String phone;
+    private final String comment;
 
     public OrderPlacementTest(String name, String surname, String address, String phone, String comment) {
         this.name = name;
@@ -44,24 +40,12 @@ public class OrderPlacementTest {
     }
 
     @Before
+    @Override
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriverForWindows.exe");
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--enable-automation");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.get(HomePage.MAIN_PAGE);
-        homePage = new HomePage(driver);
-        homePage.clickCookieButton();
+        setBrowserType("chrome");
+        super.setUp();
         orderPage = new OrderPage(driver);
-    }
-
-    @After
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
         }
-    }
 
     @Test
     public void testOrderPlacementTopOrderButton() {
